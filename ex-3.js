@@ -1,7 +1,7 @@
 "use strict";
 
 let w, h;
-let location, speed, acceleration;
+let loc, speed, acceleration;
 
 function setup() {
     w = windowWidth;
@@ -9,7 +9,7 @@ function setup() {
     createCanvas(w, h);
     background(200);
 
-    location = createVector(w / 2, h / 2);
+    loc = createVector(w / 2, h / 2);
     speed = createVector();
     acceleration = createVector();
 }
@@ -17,9 +17,20 @@ function setup() {
 function draw() {
     background(200);
 
-    //Formula for movement
-    //
-    //
+    //mouse vec
+    let mouse = createVector(mouseX, mouseY)
+    mouse.sub(loc)
 
-    ellipse(location.x, location.y, 50);
+    mouse.setMag(0.1)
+  
+    acceleration.add(mouse)
+    
+    //Formula for movement
+    speed.add(acceleration)
+    speed.limit(4)
+    loc.add(speed)
+   
+
+
+    ellipse(loc.x, loc.y, 50);
 }
